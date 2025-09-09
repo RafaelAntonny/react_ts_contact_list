@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import theme from '../../styles/theme';
 
 export const Aside = styled.aside`
   padding: 1rem;
-  background-color: #eee;
+  background-color: ${theme.darkerBG};
   height: 100vh;
 `;
 
@@ -15,17 +16,17 @@ export const Filters = styled.div`
 
 export const SearchBar = styled.input`
   padding: 0.5rem;
-  background-color: #f9f9f9;
+  background-color: ${theme.background};
   border-radius: 8px;
   font-weight: bold;
-  border: 1px solid #aba6c1;
+  border: 1px solid ${theme.border};
   width: 100%;
   outline: none;
 
   transition: all 0.2s ease-in-out;
 
   &:focus {
-    border-color: #6c63ff;
+    border-color: ${theme.active};
     box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
   }
 `;

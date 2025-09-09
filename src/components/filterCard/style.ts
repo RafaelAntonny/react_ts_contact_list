@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
 import { Props } from '.';
+import theme from '../../styles/theme';
 
-export const Card = styled.div<Props>`
+type CoreProps = Omit<Props, 'counter' | 'caption'>;
+
+export const Card = styled.button<CoreProps>`
   padding: 0.5rem;
-  border: 1px solid ${(props) => (props.active ? '#6c63ff' : '#aba6c1')};
-  color: #43387b;
-  background-color: ${(props) => (props.active ? '#fff' : '#f8f8f8')};
+  border: 1px solid ${(props) => (props.active ? theme.active : theme.border)};
+  color: ${theme.secondaryText};
+  background-color: ${(props) =>
+    props.active ? theme.brighterBG : theme.cardBG};
   border-radius: 8px;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -15,7 +19,7 @@ export const Card = styled.div<Props>`
     props.active ? '0 0 0 2px rgba(108, 99, 255, 0.1)' : 'none'};
 
   &:hover {
-    border-color: #6c63ff;
+    border-color: ${theme.active};
   }
 `;
 
