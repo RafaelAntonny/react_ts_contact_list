@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import * as S from './style';
-
-type Tag = {
-  label: string;
-  color?: string;
-};
+import { Tag } from '../../models/Contact';
 
 type Props = {
   name: string;
