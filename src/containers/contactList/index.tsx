@@ -4,13 +4,13 @@ import { Container } from './style';
 import { RootReducer } from '../../store';
 
 const ContactList = () => {
-  const { contacts } = useSelector((state: RootReducer) => state);
+  const { items } = useSelector((state: RootReducer) => state.contacts);
 
   return (
     <Container>
-      <p>{contacts.length} contatos com o termo: &quot;termo&quot;</p>
+      <p>{items.length} contatos com o termo: &quot;termo&quot;</p>
       <ul>
-        {contacts.map((contact) => (
+        {items.map((contact) => (
           <li key={contact.name}>
             <Contact {...contact} />
           </li>

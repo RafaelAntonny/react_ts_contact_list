@@ -47,7 +47,7 @@ export const ActionBar = styled.div`
 `;
 
 export const Button = styled.button<{
-  variant?: 'default' | 'success' | 'failure';
+  $variant?: 'default' | 'success' | 'failure';
 }>`
   font-weight: bold;
   font-size: 0.75rem;
@@ -58,8 +58,8 @@ export const Button = styled.button<{
   border-radius: 8px;
   margin-right: 0.5rem;
 
-  background-color: ${({ variant = 'default' }) =>
-    variant === 'default' ? theme.buttonDefault : theme[variant]};
+  background-color: ${({ $variant = 'default' }) =>
+    $variant === 'default' ? theme.buttonDefault : theme[$variant]};
 
   &:hover {
     opacity: 0.9;

@@ -1,15 +1,13 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import ContactClass from '../../models/Contact';
+import { remove } from '../../store/reducers/contacts';
 import * as S from './style';
-import { Tag } from '../../models/Contact';
 
-type Props = {
-  name: string;
-  tags: Tag[];
-  email: string;
-  phoneNumber: string;
-};
+type Props = ContactClass;
 
-const Contact = ({ name, tags = [], email, phoneNumber }: Props) => {
+const Contact = ({ id, name, tags = [], email, phoneNumber }: Props) => {
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   return (
     <S.Card>
@@ -24,15 +22,17 @@ const Contact = ({ name, tags = [], email, phoneNumber }: Props) => {
       <S.ActionBar>
         {isEditing ? (
           <>
-            <S.Button variant="success">Salvar</S.Button>
-            <S.Button variant="failure" onClick={() => setIsEditing(false)}>
+            <S.Button $variant="success">Salvar</S.Button>
+            <S.Button $variant="failure" onClick={() => setIsEditing(false)}>
               Cancelar
             </S.Button>
           </>
         ) : (
           <>
             <S.Button onClick={() => setIsEditing(true)}>Editar</S.Button>
-            <S.Button variant="failure">Remover</S.Button>
+            <S.Button $variant="failure" onClick={() => dispatch(remove(id))}>
+              Remover
+            </S.Button>
           </>
         )}
       </S.ActionBar>
