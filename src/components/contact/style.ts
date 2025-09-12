@@ -35,10 +35,23 @@ export const Tag = styled.span<{ label: string; color?: string }>`
   display: inline-block;
 `;
 
-export const Info = styled.p`
+export const Input = styled.input<{ $isEditing: boolean }>`
+  background: transparent;
+  display: block;
+  border-radius: 8px;
+  min-width: 40ch;
   font-size: 1rem;
   line-height: 1.5rem;
   margin: 0.5rem 0;
+  color: inherit;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+
+  border: ${({ $isEditing }) =>
+    $isEditing ? `1px solid ${theme.active}` : '1px solid transparent'};
+
+  box-shadow: ${({ $isEditing }) =>
+    $isEditing ? '0 0 0 2px rgba(108, 99, 255, 0.1)' : 'none'};
 `;
 
 export const ActionBar = styled.div`
