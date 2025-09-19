@@ -2,9 +2,10 @@ export type Tag = {
   id: number;
   label: string;
   color?: string;
+  kind?: 'group' | 'tag';
 };
 
-class Contact {
+class ContactModel {
   id: number;
   name: string;
   email: string;
@@ -26,4 +27,4 @@ class Contact {
   }
 }
 
-export default Contact;
+export default ContactModel;

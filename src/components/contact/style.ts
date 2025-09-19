@@ -5,7 +5,7 @@ const getTagColor = (label: string, tagColor?: string) => {
   if (tagColor) return tagColor;
 
   const lowerLabel = label.toLowerCase();
-  if (lowerLabel === 'amigo') return theme.friend;
+  if (lowerLabel === 'amigos') return theme.friend;
   if (lowerLabel === 'familia') return theme.success;
 
   return theme.work;

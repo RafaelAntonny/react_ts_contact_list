@@ -13,8 +13,8 @@ const initialState: ContactsState = {
       email: 'rafaelandrade@gmail.com',
       phoneNumber: '11 12345-6789',
       tags: [
-        { id: 1, label: 'trabalho' },
-        { id: 2, label: 'amigo' }
+        { id: 1, label: 'trabalho', kind: 'group' },
+        { id: 2, label: 'amigos', kind: 'group' }
       ]
     },
     {
@@ -22,21 +22,21 @@ const initialState: ContactsState = {
       name: 'Maria Silva',
       email: 'maria.silva@gmail.com',
       phoneNumber: '11 98765-4321',
-      tags: [{ id: 3, label: 'amigo' }]
+      tags: [{ id: 3, label: 'familia', kind: 'group' }]
     },
     {
       id: 3,
       name: 'João Pereira',
       email: 'joao.pereira@gmail.com',
       phoneNumber: '11 11223-4455',
-      tags: [{ id: 4, label: 'trabalho' }]
+      tags: [{ id: 4, label: 'familia', kind: 'group' }]
     },
     {
       id: 4,
       name: 'Ana Costa',
       email: 'ana.costa@gmail.com',
       phoneNumber: '11 99887-6655',
-      tags: [{ id: 5, label: 'familia' }]
+      tags: [{ id: 5, label: 'veterinaria', kind: 'tag', color: '#00ff55' }]
     },
     {
       id: 5,
@@ -44,8 +44,8 @@ const initialState: ContactsState = {
       email: 'lucas.mendes@gmail.com',
       phoneNumber: '11 55667-8899',
       tags: [
-        { id: 6, label: 'amigo' },
-        { id: 7, label: 'trabalho' }
+        { id: 6, label: 'amigos', kind: 'group' },
+        { id: 7, label: 'doutor', kind: 'tag', color: '#ff0033' }
       ]
     }
   ]

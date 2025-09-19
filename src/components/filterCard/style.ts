@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-import { Props } from '.';
 import theme from '../../styles/theme';
 
-type CoreProps = Omit<Props, 'counter' | 'caption'>;
+type Props = {
+  $active: boolean;
+};
 
-export const Card = styled.button<CoreProps>`
+export const Card = styled.button<Props>`
   padding: 0.5rem;
   border: 1px solid ${(props) => (props.$active ? theme.active : theme.border)};
   color: ${theme.secondaryText};
