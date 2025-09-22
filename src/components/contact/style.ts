@@ -11,12 +11,18 @@ const getTagColor = (label: string, tagColor?: string) => {
   return theme.work;
 };
 
-export const Card = styled.div`
+export const Card = styled.div<{ $isEditing: boolean }>`
   background-color: ${theme.brighterBG};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   border-radius: 16px;
   margin-bottom: 2rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: ${({ $isEditing }) =>
+    $isEditing
+      ? '0px 4px 4px rgba(108, 99, 255, 0.1)'
+      : '0px 4px 4px rgba(0, 0, 0, 0.1)'};
+  border: ${({ $isEditing }) =>
+    $isEditing ? `1px solid ${theme.active}` : '1px solid transparent'};
 `;
 
 export const Name = styled.h3`
@@ -39,42 +45,18 @@ export const Input = styled.input<{ $isEditing: boolean }>`
   background: transparent;
   display: block;
   border-radius: 8px;
-  min-width: 40ch;
+  min-width: 30ch;
   font-size: 1rem;
-  line-height: 1.5rem;
   margin: 0.5rem 0;
+  padding: 0.25rem 0.5rem;
   color: inherit;
   outline: none;
   transition: all 0.2s ease-in-out;
-
   border: ${({ $isEditing }) =>
-    $isEditing ? `1px solid ${theme.active}` : '1px solid transparent'};
-
-  box-shadow: ${({ $isEditing }) =>
-    $isEditing ? '0 0 0 2px rgba(108, 99, 255, 0.1)' : 'none'};
+    $isEditing ? `1px solid #aaa` : '1px solid transparent'};
 `;
 
 export const ActionBar = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 1rem;
-`;
-
-export const Button = styled.button<{
-  $variant?: 'default' | 'success' | 'failure';
-}>`
-  font-weight: bold;
-  font-size: 0.75rem;
-  color: #fff;
-  padding: 0.5rem 0.75rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  margin-right: 0.5rem;
-
-  background-color: ${({ $variant = 'default' }) =>
-    $variant === 'default' ? theme.buttonDefault : theme[$variant]};
-
-  &:hover {
-    opacity: 0.9;
-  }
 `;

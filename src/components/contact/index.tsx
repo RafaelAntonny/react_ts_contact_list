@@ -1,7 +1,10 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ContactClass from '../../models/Contact';
-import { edit, remove } from '../../store/reducers/contacts';
+import { RootReducer } from '../../store';
+import { editContact, removeContact } from '../../store/reducers/contacts';
+import { Button } from '../../styles';
 import * as S from './style';
 
 type Props = ContactClass;
@@ -9,7 +12,7 @@ type Props = ContactClass;
 const Contact = ({
   id,
   name,
-  tags = [],
+  tagIds = [],
   email: originalEmail,
   phoneNumber: originalPhone
 }: Props) => {
@@ -17,6 +20,14 @@ const Contact = ({
   const [isEditing, setIsEditing] = useState(false);
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const makeSelectTagsByIds = (tagIds: number[]) =>
+    createSelector(
+      (state: RootReducer) => state.tags.items,
+      (tags) => tags.filter((tag) => tagIds.includes(tag.id))
+    );
+
+  const selectTags = makeSelectTagsByIds(tagIds);
+  const tagObjects = useSelector(selectTags);
 
   useEffect(() => {
     if (originalEmail.length > 0) {
@@ -34,9 +45,9 @@ const Contact = ({
   }
 
   return (
-    <S.Card>
+    <S.Card $isEditing={isEditing}>
       <S.Name>{name}</S.Name>
-      {tags.map((tag) => (
+      {tagObjects.map((tag) => (
         <S.Tag key={tag.label} label={tag.label} color={tag.color}>
           {tag.label}
         </S.Tag>
@@ -56,14 +67,14 @@ const Contact = ({
       <S.ActionBar>
         {isEditing ? (
           <>
-            <S.Button
+            <Button
               $variant="success"
               onClick={() => {
                 dispatch(
-                  edit({
+                  editContact({
                     id,
                     name,
-                    tags,
+                    tagIds,
                     email,
                     phoneNumber: phone
                   })
@@ -72,17 +83,20 @@ const Contact = ({
               }}
             >
               Salvar
-            </S.Button>
-            <S.Button $variant="failure" onClick={cancelEdit}>
+            </Button>
+            <Button $variant="failure" onClick={cancelEdit}>
               Cancelar
-            </S.Button>
+            </Button>
           </>
         ) : (
           <>
-            <S.Button onClick={() => setIsEditing(true)}>Editar</S.Button>
-            <S.Button $variant="failure" onClick={() => dispatch(remove(id))}>
+            <Button onClick={() => setIsEditing(true)}>Editar</Button>
+            <Button
+              $variant="failure"
+              onClick={() => dispatch(removeContact(id))}
+            >
               Remover
-            </S.Button>
+            </Button>
           </>
         )}
       </S.ActionBar>

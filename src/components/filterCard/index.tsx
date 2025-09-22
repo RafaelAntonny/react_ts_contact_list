@@ -10,30 +10,28 @@ export type Props = {
 
 const FilterCard = ({ caption, criteria }: Props) => {
   const dispatch = useDispatch();
-  const { filter, contacts } = useSelector((state: RootReducer) => state);
+  const filter = useSelector((state: RootReducer) => state.filter);
+  const contacts = useSelector((state: RootReducer) => state.contacts.items);
+  const tags = useSelector((state: RootReducer) => state.tags.items);
 
   const isActive = () => {
-    const activeCriteria = filter.criteria === criteria;
-    const activeCaption = filter.caption === caption;
-
-    return activeCriteria && activeCaption;
+    if (criteria === 'all') {
+      return filter.criteria === 'all';
+    }
+    return filter.criteria === criteria && filter.caption === caption;
   };
 
   const countContacts = (): number => {
-    if (criteria === 'all') return contacts.items.length;
+    if (criteria === 'all') return contacts.length;
 
-    if (criteria === 'group') {
-      return contacts.items.filter((item) =>
-        item.tags.some((tag) => tag.kind === 'group' && tag.label === caption)
+    if (criteria === 'group' || criteria === 'tag') {
+      return contacts.filter((item) =>
+        item.tagIds.some((tagId) => {
+          const tag = tags.find((t) => t.id === tagId);
+          return tag && tag.kind === criteria && tag.label === caption;
+        })
       ).length;
     }
-
-    if (criteria === 'tag') {
-      return contacts.items.filter((item) =>
-        item.tags.some((tag) => tag.kind === 'tag' && tag.label === caption)
-      ).length;
-    }
-
     return 0;
   };
 
