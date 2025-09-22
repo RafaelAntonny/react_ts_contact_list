@@ -4,7 +4,7 @@ import SideBar from '../../containers/sideBar';
 const Create = () => {
   return (
     <>
-      <SideBar />
+      <SideBar $showFilters={false} />
       <Form />
     </>
   );

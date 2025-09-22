@@ -3,7 +3,7 @@ import SideBar from '../../containers/sideBar';
 
 const Home = () => (
   <>
-    <SideBar />
+    <SideBar $showFilters={true} />
     <ContactList />
   </>
 );

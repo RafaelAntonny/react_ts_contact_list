@@ -42,11 +42,7 @@ const Form = () => {
       contactTagIds = contactTagIds.filter((id) => id !== -1).concat(newTagId);
     }
 
-    const newContactId =
-      contacts.length > 0 ? Math.max(...contacts.map((c) => c.id)) + 1 : 1;
-
     const newContact = {
-      id: newContactId,
       name,
       email,
       phoneNumber: telephone,
