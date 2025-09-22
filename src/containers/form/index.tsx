@@ -11,7 +11,6 @@ import * as s from './style';
 const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const contacts = useSelector((state: RootReducer) => state.contacts.items);
   const tags = useSelector((state: RootReducer) => state.tags.items);
 
   const [name, setName] = useState('');
